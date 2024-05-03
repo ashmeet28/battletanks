@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0brxtrq7hbqd"]
+
+[ext_resource type="Script" path="res://Tank.gd" id="1_rs3l4"]
+[ext_resource type="Texture2D" uid="uid://ripnm651wmvc" path="res://tank.svg" id="2_sdygd"]
+
+[node name="Playground" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+script = ExtResource("1_rs3l4")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(0, -16.25)
+texture = ExtResource("2_sdygd")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CharacterBody2D"]
+position = Vector2(0, -16.25)
+polygon = PackedVector2Array(0, -87, 10, -87, 10, -54, 75, -54, 75, 87, -75, 87, -75, -54, -10, -54, -10, -87)
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
