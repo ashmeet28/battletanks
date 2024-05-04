@@ -21,7 +21,7 @@ func neural_network_layer_process(neurons_layer, input_values):
 		neurons_layer["temp_outputs"][i] = neurons_layer["biases"][i]
 		for j in range(neurons_layer["weights"][0].size()):
 			neurons_layer["temp_outputs"][i] += input_values[j] * neurons_layer["weights"][i][j]
-			if neurons_layer["temp_outputs"][i] < 0:
+			if neurons_layer["temp_outputs"][i] < 0.0:
 				neurons_layer["temp_outputs"][i] = 0.0
 
 func neural_network_process(neural_network, input_values):
@@ -43,11 +43,6 @@ func neural_network_mutate(neural_network, bias_mut_val, weight_mut_val):
 
 
 const MAX_SPEED = 300.0
-
-func _ready():
-	var nn = neural_network_create([3,4,6])
-	neural_network_mutate(nn, 2, 2)
-	print(nn)
 
 func _physics_process(delta):
 	velocity = Vector2.ZERO
