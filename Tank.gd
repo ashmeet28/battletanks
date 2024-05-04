@@ -16,28 +16,41 @@ func neural_network_create(layers_design):
 		new_neural_network["layers"].append(neural_network_layer_create(layers_design[i], layers_design[i+1]))
 	return new_neural_network
 
-func neural_network_layer_process(input_values, neurons_layer):
+func neural_network_layer_process(neurons_layer, input_values):
 	for i in range(neurons_layer["weights"].size()):
 		neurons_layer["temp_outputs"][i] = neurons_layer["biases"][i]
 		for j in range(neurons_layer["weights"][0].size()):
-			neurons_layer["temp_outputs"][i] += input_values[j] * neurons_layer["weights"][i][j];
+			neurons_layer["temp_outputs"][i] += input_values[j] * neurons_layer["weights"][i][j]
 			if neurons_layer["temp_outputs"][i] < 0:
-				neurons_layer["temp_outputs"][i] = 0
+				neurons_layer["temp_outputs"][i] = 0.0
 
 func neural_network_process(neural_network, input_values):
-	neural_network_layer_process(input_values, neural_network["layers"][0])
+	neural_network_layer_process(neural_network["layers"][0], input_values)
 	for i in range(1, neural_network["layers"].size()):
-		neural_network_layer_process(neural_network["layers"][i-1]["temp_outputs"], neural_network["layers"][i])
+		neural_network_layer_process(neural_network["layers"][i], neural_network["layers"][i-1]["temp_outputs"])
 	return neural_network["layers"][-1]["temp_outputs"]
+
+func neural_network_layer_mutate(neurons_layer, bias_mut_val, weight_mut_val):
+	for i in range(neurons_layer["weights"].size()):
+		neurons_layer["biases"][i] = neurons_layer["biases"][i] + randf_range(-(bias_mut_val), bias_mut_val)
+		for j in range(neurons_layer["weights"][0].size()):
+			neurons_layer["weights"][i][j] = neurons_layer["weights"][i][j] + randf_range(-(weight_mut_val), weight_mut_val)
+
+func neural_network_mutate(neural_network, bias_mut_val, weight_mut_val):
+	for i in range(neural_network["layers"].size()):
+		neural_network_layer_mutate(neural_network["layers"][i], bias_mut_val, weight_mut_val)
+
+
 
 const MAX_SPEED = 300.0
 
 func _ready():
-	print(neural_network_process(neural_network_create([3,4,6]),[1,2,3]))
+	var nn = neural_network_create([3,4,6])
+	neural_network_mutate(nn, 2, 2)
+	print(nn)
 
 func _physics_process(delta):
 	velocity = Vector2.ZERO
-	
 	if Input.is_action_pressed("tank_move_forward"):
 		velocity.y = -MAX_SPEED
 	if Input.is_action_pressed("tank_move_backwards"):
