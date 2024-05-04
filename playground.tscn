@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0brxtrq7hbqd"]
+[gd_scene load_steps=4 format=3 uid="uid://d0brxtrq7hbqd"]
 
 [ext_resource type="Script" path="res://Tank.gd" id="1_rs3l4"]
 [ext_resource type="Texture2D" uid="uid://ripnm651wmvc" path="res://tank.svg" id="2_sdygd"]
+[ext_resource type="Texture2D" uid="uid://b405xhrfi3rr7" path="res://missile.svg" id="3_2cq2u"]
 
 [node name="Playground" type="Node2D"]
 
@@ -18,3 +19,12 @@ polygon = PackedVector2Array(0, -87, 10, -87, 10, -54, 75, -54, 75, 87, -75, 87,
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
 zoom = Vector2(0.5, 0.5)
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+linear_damp_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+texture = ExtResource("3_2cq2u")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+polygon = PackedVector2Array(0, -38, 7.5, -25, 7.5, 36.5, -7.5, 36.5, -7.5, -25)
