@@ -17,3 +17,4 @@ position = Vector2(0, -16.25)
 polygon = PackedVector2Array(0, -87, 10, -87, 10, -54, 75, -54, 75, 87, -75, 87, -75, -54, -10, -54, -10, -87)
 
 [node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+zoom = Vector2(4, 4)
