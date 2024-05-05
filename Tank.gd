@@ -41,36 +41,53 @@ func neural_network_mutate(neural_network, bias_mut_val, weight_mut_val):
 		neural_network_layer_mutate(neural_network["layers"][i], bias_mut_val, weight_mut_val)
 
 
+@export var is_ai_controlled:bool = false
 
 const MAX_SPEED = 500.0
-var missile_last_fired:int = 0
+
 const MISSILE_COOLDOWN:int = 60
+var missile_last_fired:int = 0
+
+var tank_id:int
+
+var tank_life:int = 100
+var tank_kills:int = 0
 
 func _ready():
-	missile_last_fired = Engine.get_physics_frames() - MISSILE_COOLDOWN
+	tank_id = $"/root/PlaygroundGlobalVariables".next_tank_id
+	$"/root/PlaygroundGlobalVariables".next_tank_id += 1
+	missile_last_fired = Engine.get_physics_frames() - (MISSILE_COOLDOWN*2)
+	if is_ai_controlled:
+		$Camera2D.enabled = false
+	add_to_group("tanks")
 
 func _physics_process(delta):
 	velocity = Vector2.ZERO
-	if Input.is_action_pressed("tank_move_forward"):
-		velocity.y = -MAX_SPEED
-	if Input.is_action_pressed("tank_move_backwards"):
-		velocity.y = MAX_SPEED
-	
-	if Input.is_action_pressed("tank_turn_right"):
-		rotate(PI * delta)
-	if Input.is_action_pressed("tank_turn_left"):
-		rotate(-(PI * delta))
-	
-	velocity = velocity.rotated(rotation)
+	if !is_ai_controlled:
+		if Input.is_action_pressed("tank_move_forward"):
+			velocity.y = -MAX_SPEED
+		if Input.is_action_pressed("tank_move_backwards"):
+			velocity.y = MAX_SPEED
+		
+		if Input.is_action_pressed("tank_turn_right"):
+			rotate(PI * delta)
+		if Input.is_action_pressed("tank_turn_left"):
+			rotate(-(PI * delta))
+		
+		velocity = velocity.rotated(rotation)
 	
 	move_and_slide()
 
-	if Input.is_action_pressed("tank_fire"):
-		var cur_frame = Engine.get_physics_frames()
-		if cur_frame > MISSILE_COOLDOWN + missile_last_fired:
-			missile_last_fired = cur_frame
-			var tank_missile_scene = preload("res://tank_missile.tscn")
-			var instance = tank_missile_scene.instantiate()
-			instance.position = position + Vector2(0, -142).rotated(rotation)
+	if Input.is_action_pressed("tank_fire") && !is_ai_controlled:
+		var curr_frame = Engine.get_physics_frames()
+		if (curr_frame > MISSILE_COOLDOWN + missile_last_fired) && !($Area2D.has_overlapping_bodies()):
+			missile_last_fired = curr_frame
+			var instance = preload("res://tank_missile.tscn").instantiate()
+			instance.position = position + Vector2(0, -160).rotated(rotation)
 			instance.rotation = rotation
+			instance.owner_tank_id = tank_id
 			get_parent().add_child(instance)
+
+	if tank_life <= 0:
+		remove_from_group("tanks")
+		queue_free()
