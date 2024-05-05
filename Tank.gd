@@ -42,7 +42,12 @@ func neural_network_mutate(neural_network, bias_mut_val, weight_mut_val):
 
 
 
-const MAX_SPEED = 300.0
+const MAX_SPEED = 500.0
+var missile_last_fired:int = 0
+const MISSILE_COOLDOWN:int = 60
+
+func _ready():
+	missile_last_fired = Engine.get_physics_frames() - MISSILE_COOLDOWN
 
 func _physics_process(delta):
 	velocity = Vector2.ZERO
@@ -57,4 +62,15 @@ func _physics_process(delta):
 		rotate(-(PI * delta))
 	
 	velocity = velocity.rotated(rotation)
+	
 	move_and_slide()
+
+	if Input.is_action_pressed("tank_fire"):
+		var cur_frame = Engine.get_physics_frames()
+		if cur_frame > MISSILE_COOLDOWN + missile_last_fired:
+			missile_last_fired = cur_frame
+			var tank_missile_scene = preload("res://tank_missile.tscn")
+			var instance = tank_missile_scene.instantiate()
+			instance.position = position + Vector2(0, -142).rotated(rotation)
+			instance.rotation = rotation
+			get_parent().add_child(instance)

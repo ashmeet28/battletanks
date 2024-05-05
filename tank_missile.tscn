@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://jiqd0a7dlcl6"]
+
+[ext_resource type="Script" path="res://TankMissile.gd" id="1_nfdic"]
+[ext_resource type="Texture2D" uid="uid://b405xhrfi3rr7" path="res://missile.svg" id="1_ywukc"]
+
+[node name="TankMissile" type="CharacterBody2D"]
+script = ExtResource("1_nfdic")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_ywukc")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, -38, 7.5, -25, 7.5, 36.5, -7.5, 36.5, -7.5, -25)
