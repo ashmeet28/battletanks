@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bd1vf8f8hjli7"]
+[gd_scene load_steps=7 format=3 uid="uid://bd1vf8f8hjli7"]
 
 [ext_resource type="Script" path="res://Tank.gd" id="1_j8f42"]
 [ext_resource type="Texture2D" uid="uid://ripnm651wmvc" path="res://tank.svg" id="2_4e4qq"]
@@ -6,13 +6,16 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kgate"]
 size = Vector2(50, 150)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gy01l"]
+size = Vector2(150, 20)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jp8nt"]
 size = Vector2(500, 500)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6l1up"]
 size = Vector2(100, 600)
 
-[node name="Tank" type="CharacterBody2D"]
+[node name="Tank" type="CharacterBody2D" groups=["tanks"]]
 script = ExtResource("1_j8f42")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -24,43 +27,23 @@ position = Vector2(0, -16.25)
 polygon = PackedVector2Array(0, -87, 10, -87, 10, -54, 75, -54, 75, 87, -75, 87, -75, -54, -10, -54, -10, -87)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
 zoom = Vector2(0.5, 0.5)
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(0, -10000)
 
-[node name="RayCast2D2" type="RayCast2D" parent="."]
-target_position = Vector2(0, 1000)
-
-[node name="RayCast2D3" type="RayCast2D" parent="."]
-rotation = 0.785398
-target_position = Vector2(0, 1000)
-
-[node name="RayCast2D4" type="RayCast2D" parent="."]
-rotation = 1.5708
-target_position = Vector2(0, 1000)
-
-[node name="RayCast2D5" type="RayCast2D" parent="."]
-rotation = 2.35619
-target_position = Vector2(0, 1000)
-
-[node name="RayCast2D6" type="RayCast2D" parent="."]
-rotation = 3.92699
-target_position = Vector2(0, 1000)
-
-[node name="RayCast2D7" type="RayCast2D" parent="."]
-rotation = 4.71239
-target_position = Vector2(0, 1000)
-
-[node name="RayCast2D8" type="RayCast2D" parent="."]
-rotation = 5.49779
-target_position = Vector2(0, 1000)
-
-[node name="Area2D" type="Area2D" parent="."]
+[node name="FrontArea2D" type="Area2D" parent="."]
 position = Vector2(0, -182)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FrontArea2D"]
 shape = SubResource("RectangleShape2D_kgate")
+
+[node name="BackArea2D" type="Area2D" parent="."]
+position = Vector2(0, 87)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BackArea2D"]
+shape = SubResource("RectangleShape2D_gy01l")
 
 [node name="Area2D2" type="Area2D" parent="." groups=["tank_area_sensors"]]
 position = Vector2(-395, 0)
@@ -174,10 +157,4 @@ shape = SubResource("RectangleShape2D_jp8nt")
 position = Vector2(0, 598)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D22"]
-shape = SubResource("RectangleShape2D_6l1up")
-
-[node name="Area2D23" type="Area2D" parent="." groups=["tank_area_sensors"]]
-position = Vector2(0, -598)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D23"]
 shape = SubResource("RectangleShape2D_6l1up")

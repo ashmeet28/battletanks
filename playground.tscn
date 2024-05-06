@@ -1,6 +1,5 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0brxtrq7hbqd"]
+[gd_scene load_steps=5 format=3 uid="uid://d0brxtrq7hbqd"]
 
-[ext_resource type="PackedScene" uid="uid://bd1vf8f8hjli7" path="res://tank.tscn" id="1_66g20"]
 [ext_resource type="Script" path="res://playground.gd" id="1_ghx3o"]
 [ext_resource type="Texture2D" uid="uid://cviv0l7osvudm" path="res://white_square.svg" id="3_khn7y"]
 
@@ -13,9 +12,10 @@ size = Vector2(1000, 20)
 [node name="Playground" type="Node2D"]
 script = ExtResource("1_ghx3o")
 
-[node name="Tank" parent="." instance=ExtResource("1_66g20")]
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.25, 0.25)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="StaticBody2D" type="StaticBody2D" parent="." groups=["walls"]]
 position = Vector2(-2010, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
@@ -25,7 +25,7 @@ texture = ExtResource("3_khn7y")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_fpkkk")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+[node name="StaticBody2D2" type="StaticBody2D" parent="." groups=["walls"]]
 position = Vector2(2010, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2"]
@@ -35,7 +35,7 @@ texture = ExtResource("3_khn7y")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 shape = SubResource("RectangleShape2D_fpkkk")
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+[node name="StaticBody2D3" type="StaticBody2D" parent="." groups=["walls"]]
 position = Vector2(0, 2010)
 rotation = 1.5708
 
@@ -46,7 +46,7 @@ texture = ExtResource("3_khn7y")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
 shape = SubResource("RectangleShape2D_fpkkk")
 
-[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+[node name="StaticBody2D4" type="StaticBody2D" parent="." groups=["walls"]]
 position = Vector2(0, -2010)
 rotation = 1.5708
 
@@ -57,7 +57,7 @@ texture = ExtResource("3_khn7y")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 shape = SubResource("RectangleShape2D_fpkkk")
 
-[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+[node name="StaticBody2D5" type="StaticBody2D" parent="." groups=["walls"]]
 position = Vector2(0, -1000)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
@@ -67,7 +67,7 @@ shape = SubResource("RectangleShape2D_dspp3")
 scale = Vector2(10, 0.2)
 texture = ExtResource("3_khn7y")
 
-[node name="StaticBody2D6" type="StaticBody2D" parent="."]
+[node name="StaticBody2D6" type="StaticBody2D" parent="." groups=["walls"]]
 position = Vector2(-1000, -1500)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6"]
@@ -77,7 +77,7 @@ shape = SubResource("RectangleShape2D_dspp3")
 scale = Vector2(10, 0.2)
 texture = ExtResource("3_khn7y")
 
-[node name="StaticBody2D7" type="StaticBody2D" parent="."]
+[node name="StaticBody2D7" type="StaticBody2D" parent="." groups=["walls"]]
 position = Vector2(0, 1000)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D7"]
@@ -87,7 +87,7 @@ shape = SubResource("RectangleShape2D_dspp3")
 scale = Vector2(10, 0.2)
 texture = ExtResource("3_khn7y")
 
-[node name="StaticBody2D8" type="StaticBody2D" parent="."]
+[node name="StaticBody2D8" type="StaticBody2D" parent="." groups=["walls"]]
 position = Vector2(1000, 1500)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D8"]
@@ -97,7 +97,7 @@ shape = SubResource("RectangleShape2D_dspp3")
 scale = Vector2(10, 0.2)
 texture = ExtResource("3_khn7y")
 
-[node name="StaticBody2D9" type="StaticBody2D" parent="."]
+[node name="StaticBody2D9" type="StaticBody2D" parent="." groups=["walls"]]
 position = Vector2(-1000, 0)
 rotation = 1.5708
 
@@ -108,7 +108,7 @@ shape = SubResource("RectangleShape2D_dspp3")
 scale = Vector2(10, 0.2)
 texture = ExtResource("3_khn7y")
 
-[node name="StaticBody2D10" type="StaticBody2D" parent="."]
+[node name="StaticBody2D10" type="StaticBody2D" parent="." groups=["walls"]]
 position = Vector2(1000, 0)
 rotation = 1.5708
 
@@ -119,7 +119,7 @@ shape = SubResource("RectangleShape2D_dspp3")
 scale = Vector2(10, 0.2)
 texture = ExtResource("3_khn7y")
 
-[node name="StaticBody2D11" type="StaticBody2D" parent="."]
+[node name="StaticBody2D11" type="StaticBody2D" parent="." groups=["walls"]]
 position = Vector2(1500, -1000)
 rotation = 1.5708
 
@@ -130,7 +130,7 @@ shape = SubResource("RectangleShape2D_dspp3")
 scale = Vector2(10, 0.2)
 texture = ExtResource("3_khn7y")
 
-[node name="StaticBody2D12" type="StaticBody2D" parent="."]
+[node name="StaticBody2D12" type="StaticBody2D" parent="." groups=["walls"]]
 position = Vector2(-1500, 1000)
 rotation = 1.5708
 
@@ -140,7 +140,3 @@ shape = SubResource("RectangleShape2D_dspp3")
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D12"]
 scale = Vector2(10, 0.2)
 texture = ExtResource("3_khn7y")
-
-[node name="Tank2" parent="." instance=ExtResource("1_66g20")]
-position = Vector2(459, 0)
-is_ai_controlled = true
