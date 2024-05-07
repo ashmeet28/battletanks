@@ -1,13 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://d0brxtrq7hbqd"]
+[gd_scene load_steps=4 format=3 uid="uid://d0brxtrq7hbqd"]
 
 [ext_resource type="Script" path="res://playground.gd" id="1_ghx3o"]
 [ext_resource type="Texture2D" uid="uid://cviv0l7osvudm" path="res://white_square.svg" id="3_khn7y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fpkkk"]
 size = Vector2(10, 4000)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dspp3"]
-size = Vector2(1000, 20)
 
 [node name="Playground" type="Node2D"]
 script = ExtResource("1_ghx3o")
@@ -56,87 +53,3 @@ texture = ExtResource("3_khn7y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 shape = SubResource("RectangleShape2D_fpkkk")
-
-[node name="StaticBody2D5" type="StaticBody2D" parent="." groups=["walls"]]
-position = Vector2(0, -1000)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
-shape = SubResource("RectangleShape2D_dspp3")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D5"]
-scale = Vector2(10, 0.2)
-texture = ExtResource("3_khn7y")
-
-[node name="StaticBody2D6" type="StaticBody2D" parent="." groups=["walls"]]
-position = Vector2(-1000, -1500)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6"]
-shape = SubResource("RectangleShape2D_dspp3")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D6"]
-scale = Vector2(10, 0.2)
-texture = ExtResource("3_khn7y")
-
-[node name="StaticBody2D7" type="StaticBody2D" parent="." groups=["walls"]]
-position = Vector2(0, 1000)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D7"]
-shape = SubResource("RectangleShape2D_dspp3")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D7"]
-scale = Vector2(10, 0.2)
-texture = ExtResource("3_khn7y")
-
-[node name="StaticBody2D8" type="StaticBody2D" parent="." groups=["walls"]]
-position = Vector2(1000, 1500)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D8"]
-shape = SubResource("RectangleShape2D_dspp3")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D8"]
-scale = Vector2(10, 0.2)
-texture = ExtResource("3_khn7y")
-
-[node name="StaticBody2D9" type="StaticBody2D" parent="." groups=["walls"]]
-position = Vector2(-1000, 0)
-rotation = 1.5708
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D9"]
-shape = SubResource("RectangleShape2D_dspp3")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D9"]
-scale = Vector2(10, 0.2)
-texture = ExtResource("3_khn7y")
-
-[node name="StaticBody2D10" type="StaticBody2D" parent="." groups=["walls"]]
-position = Vector2(1000, 0)
-rotation = 1.5708
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D10"]
-shape = SubResource("RectangleShape2D_dspp3")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D10"]
-scale = Vector2(10, 0.2)
-texture = ExtResource("3_khn7y")
-
-[node name="StaticBody2D11" type="StaticBody2D" parent="." groups=["walls"]]
-position = Vector2(1500, -1000)
-rotation = 1.5708
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D11"]
-shape = SubResource("RectangleShape2D_dspp3")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D11"]
-scale = Vector2(10, 0.2)
-texture = ExtResource("3_khn7y")
-
-[node name="StaticBody2D12" type="StaticBody2D" parent="." groups=["walls"]]
-position = Vector2(-1500, 1000)
-rotation = 1.5708
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D12"]
-shape = SubResource("RectangleShape2D_dspp3")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D12"]
-scale = Vector2(10, 0.2)
-texture = ExtResource("3_khn7y")
