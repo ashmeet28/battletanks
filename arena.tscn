@@ -1,3 +1,53 @@
-[gd_scene format=3 uid="uid://bb2u5j3wdfwjo"]
+[gd_scene load_steps=3 format=3 uid="uid://bb2u5j3wdfwjo"]
+
+[ext_resource type="Texture2D" uid="uid://be3ur7c5685av" path="res://white_square.svg" id="1_ug6ib"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xbn64"]
+size = Vector2(4000, 10)
 
 [node name="Arena" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.25, 0.25)
+
+[node name="Wall" type="StaticBody2D" parent="." groups=["walls"]]
+position = Vector2(0, -2010)
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall"]
+scale = Vector2(40, 0.1)
+texture = ExtResource("1_ug6ib")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall"]
+shape = SubResource("RectangleShape2D_xbn64")
+
+[node name="Wall2" type="StaticBody2D" parent="." groups=["walls"]]
+position = Vector2(0, 2010)
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall2"]
+scale = Vector2(40, 0.1)
+texture = ExtResource("1_ug6ib")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2"]
+shape = SubResource("RectangleShape2D_xbn64")
+
+[node name="Wall3" type="StaticBody2D" parent="." groups=["walls"]]
+position = Vector2(2010, 0)
+rotation = 1.5708
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall3"]
+scale = Vector2(40, 0.1)
+texture = ExtResource("1_ug6ib")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3"]
+shape = SubResource("RectangleShape2D_xbn64")
+
+[node name="Wall4" type="StaticBody2D" parent="." groups=["walls"]]
+position = Vector2(-2010, 0)
+rotation = 1.5708
+
+[node name="Sprite2D" type="Sprite2D" parent="Wall4"]
+scale = Vector2(40, 0.1)
+texture = ExtResource("1_ug6ib")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall4"]
+shape = SubResource("RectangleShape2D_xbn64")
