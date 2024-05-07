@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://bv4l1h3g3a5r2"]
+[gd_scene load_steps=3 format=3 uid="uid://bv4l1h3g3a5r2"]
 
+[ext_resource type="Script" path="res://tank.gd" id="1_nvqc3"]
 [ext_resource type="Texture2D" uid="uid://cuy4n1yfc0alr" path="res://tank.svg" id="1_vw1a2"]
 
-[node name="Tank" type="CharacterBody2D"]
+[node name="Tank" type="CharacterBody2D" groups=["tanks"]]
 motion_mode = 1
+script = ExtResource("1_nvqc3")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16.25)
@@ -13,4 +15,4 @@ texture = ExtResource("1_vw1a2")
 polygon = PackedVector2Array(0, -103.25, 10, -103.25, 10, -70.25, 75, -70.25, 75, 70.75, -75, 70.75, -75, -70.25, -10, -70.25, -10, -103.25)
 
 [node name="Camera2D" type="Camera2D" parent="."]
-enabled = false
+zoom = Vector2(0.8, 0.8)

@@ -1,13 +1,22 @@
-[gd_scene load_steps=3 format=3 uid="uid://bb2u5j3wdfwjo"]
+[gd_scene load_steps=6 format=3 uid="uid://bb2u5j3wdfwjo"]
 
+[ext_resource type="Script" path="res://arena.gd" id="1_midel"]
 [ext_resource type="Texture2D" uid="uid://be3ur7c5685av" path="res://white_square.svg" id="1_ug6ib"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xbn64"]
 size = Vector2(4000, 10)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h60w5"]
+size = Vector2(1000, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3fmwe"]
+size = Vector2(300, 300)
+
 [node name="Arena" type="Node2D"]
+script = ExtResource("1_midel")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
 zoom = Vector2(0.25, 0.25)
 
 [node name="Wall" type="StaticBody2D" parent="." groups=["walls"]]
@@ -51,3 +60,56 @@ texture = ExtResource("1_ug6ib")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Wall4"]
 shape = SubResource("RectangleShape2D_xbn64")
+
+[node name="InnerWall" type="StaticBody2D" parent="." groups=["walls"]]
+position = Vector2(1000, 1000)
+rotation = -0.785398
+
+[node name="Sprite2D" type="Sprite2D" parent="InnerWall"]
+scale = Vector2(10, 0.4)
+texture = ExtResource("1_ug6ib")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InnerWall"]
+shape = SubResource("RectangleShape2D_h60w5")
+
+[node name="InnerWall2" type="StaticBody2D" parent="." groups=["walls"]]
+position = Vector2(-1000, 1000)
+rotation = 0.785398
+
+[node name="Sprite2D" type="Sprite2D" parent="InnerWall2"]
+scale = Vector2(10, 0.4)
+texture = ExtResource("1_ug6ib")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InnerWall2"]
+shape = SubResource("RectangleShape2D_h60w5")
+
+[node name="InnerWall3" type="StaticBody2D" parent="." groups=["walls"]]
+position = Vector2(-1000, -1000)
+rotation = -0.785398
+
+[node name="Sprite2D" type="Sprite2D" parent="InnerWall3"]
+scale = Vector2(10, 0.4)
+texture = ExtResource("1_ug6ib")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InnerWall3"]
+shape = SubResource("RectangleShape2D_h60w5")
+
+[node name="InnerWall4" type="StaticBody2D" parent="." groups=["walls"]]
+position = Vector2(1000, -1000)
+rotation = 0.785398
+
+[node name="Sprite2D" type="Sprite2D" parent="InnerWall4"]
+scale = Vector2(10, 0.4)
+texture = ExtResource("1_ug6ib")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InnerWall4"]
+shape = SubResource("RectangleShape2D_h60w5")
+
+[node name="InnerBlock" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InnerBlock"]
+shape = SubResource("RectangleShape2D_3fmwe")
+
+[node name="Sprite2D" type="Sprite2D" parent="InnerBlock"]
+scale = Vector2(3, 3)
+texture = ExtResource("1_ug6ib")

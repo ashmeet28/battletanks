@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://uidd7rrcvmky"]
+[gd_scene load_steps=3 format=3 uid="uid://uidd7rrcvmky"]
 
+[ext_resource type="Script" path="res://tank_missile.gd" id="1_m2pvd"]
 [ext_resource type="Texture2D" uid="uid://gcokdi74a3yw" path="res://tank_missile.svg" id="1_syvv7"]
 
-[node name="TankMissile" type="Area2D"]
+[node name="TankMissile" type="Area2D" groups=["missiles"]]
+script = ExtResource("1_m2pvd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_syvv7")
