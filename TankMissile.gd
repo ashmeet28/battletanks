@@ -17,7 +17,7 @@ func _physics_process(_delta):
 			if collision.get_collider().tank_life <= 0:
 				for t in get_tree().get_nodes_in_group("tanks"):
 					if t.tank_id == owner_tank_id:
-						t.tank_damage += 25
+						t.tank_damage_given += 25
 						break
 			is_collided_with_tank = true
 		queue_free()

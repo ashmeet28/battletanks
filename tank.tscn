@@ -1,13 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bd1vf8f8hjli7"]
+[gd_scene load_steps=4 format=3 uid="uid://bd1vf8f8hjli7"]
 
 [ext_resource type="Script" path="res://Tank.gd" id="1_j8f42"]
 [ext_resource type="Texture2D" uid="uid://ripnm651wmvc" path="res://tank.svg" id="2_4e4qq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kgate"]
 size = Vector2(50, 150)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gy01l"]
-size = Vector2(150, 20)
 
 [node name="Tank" type="CharacterBody2D" groups=["tanks"]]
 script = ExtResource("1_j8f42")
@@ -32,9 +29,3 @@ position = Vector2(0, -182)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FrontArea2D"]
 shape = SubResource("RectangleShape2D_kgate")
-
-[node name="BackArea2D" type="Area2D" parent="."]
-position = Vector2(0, 87)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BackArea2D"]
-shape = SubResource("RectangleShape2D_gy01l")
