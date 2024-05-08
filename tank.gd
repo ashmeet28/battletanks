@@ -9,8 +9,6 @@ var tank_id:int
 var tank_life:int = 100
 var tank_damage_given:int = 0
 
-signal tank_shot_missile(missile_position, missile_rotation, tank_id)
-
 func _ready():
 	missile_last_fired = Time.get_ticks_msec()
 
@@ -33,7 +31,11 @@ func _physics_process(delta):
 		var curr_time = Time.get_ticks_msec()
 		if (curr_time > TANK_COOLDOWN_TIME + missile_last_fired):
 			missile_last_fired = curr_time
-			tank_shot_missile.emit(position + Vector2(0, -160).rotated(rotation), rotation, tank_id)
+			var instance = preload("res://tank_missile.tscn").instantiate()
+			instance.position = position + Vector2(0, -160).rotated(rotation)
+			instance.rotation = rotation
+			instance.owner_tank_id = tank_id
+			get_parent().add_child(instance)
 
 	move_and_slide()
 

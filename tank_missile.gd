@@ -10,9 +10,8 @@ func _physics_process(delta):
 		for b in get_overlapping_bodies():
 			if b.is_in_group("tanks") && !is_collided_with_tank:
 				b.tank_life -= 25
-				for t in get_tree().get_nodes_in_group("tanks"):
-					if t.tank_id == owner_tank_id:
-						t.tank_damage_given += 25
-						break
+				for curr_tank in get_tree().get_nodes_in_group("tanks"):
+					if curr_tank.tank_id == owner_tank_id:
+						curr_tank.tank_damage_given += 25
 				is_collided_with_tank = true
 		queue_free()

@@ -105,7 +105,7 @@ texture = ExtResource("1_ug6ib")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InnerWall4"]
 shape = SubResource("RectangleShape2D_h60w5")
 
-[node name="InnerBlock" type="StaticBody2D" parent="."]
+[node name="InnerBlock" type="StaticBody2D" parent="." groups=["walls"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InnerBlock"]
 shape = SubResource("RectangleShape2D_3fmwe")
