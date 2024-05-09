@@ -26,13 +26,6 @@ func get_next_tank_id():
 					#tank_path_points[p.validator_id][1] = 0
 					#p.queue_free()
 					#break
-
-#func tank_path_points_get_invalid_point_indexes(p):
-	#var invalid_p = []
-		#for i in range(p.size()):
-			#if p[i][1] == 0:
-				#invalid_p.append(i)
-	#return invalid_p
 	
 var ptank
 var btank
@@ -51,15 +44,16 @@ func _ready():
 	add_child(instance2)
 
 func _process(_delta):
-	var astar = ArenaGlobalVariables.bot_tank_astar
-	var p1 = astar.get_closest_point(btank.position)
-	var p2 = astar.get_closest_point(ptank.position)
-	var p_list = astar.get_id_path(p1, p2)
+	var p1 = ArenaGlobalVariables.bot_tank_astar.get_closest_point(btank.position)
+	var p2 = ArenaGlobalVariables.bot_tank_astar.get_closest_point(ptank.position)
+	var p_list = ArenaGlobalVariables.bot_tank_astar.get_id_path(p1, p2)
 	for p in get_tree().get_nodes_in_group("point_validators"):
 		p.queue_free()
 	
 	for i in p_list:
 		var instance = preload("res://tank_point_validator.tscn").instantiate()
-		instance.position = astar.get_point_position(i)
+		instance.position = ArenaGlobalVariables.bot_tank_astar.get_point_position(i)
+		instance.validator_id = i
 		add_child(instance)
+		#print(p_list)
 
