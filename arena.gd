@@ -5,28 +5,6 @@ func get_next_tank_id():
 	current_tank_id += 1
 	return current_tank_id
 
-#func tank_path_points_spaw():
-	#var tank_path_points = []
-	#var sl = 250
-	#for y in range(17):
-		#for x in range(17):
-			#tank_path_points.append([[(x*sl)-2000,(y*sl)-2000],1])
-	#for i in range(tank_path_points.size()):
-		#var instance = preload("res://tank_point_validator.tscn").instantiate()
-		#instance.position = Vector2(tank_path_points[i][0][0], tank_path_points[i][0][1])
-		#instance.validator_id = i
-		#add_child(instance)
-	#return tank_path_points
-#
-#func tank_path_points_validate(tank_path_points):
-	#for p in get_tree().get_nodes_in_group("point_validators"):
-		#if p.has_overlapping_bodies():
-			#for b in p.get_overlapping_bodies():
-				#if b.is_in_group("walls"):
-					#tank_path_points[p.validator_id][1] = 0
-					#p.queue_free()
-					#break
-	
 var ptank
 var btank
 
@@ -55,5 +33,5 @@ func _process(_delta):
 		instance.position = ArenaGlobalVariables.bot_tank_astar.get_point_position(i)
 		instance.validator_id = i
 		add_child(instance)
-		#print(p_list)
+
 

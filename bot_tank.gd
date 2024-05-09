@@ -13,10 +13,5 @@ func _ready():
 	missile_last_fired = Time.get_ticks_msec()
 
 func _physics_process(_delta):
-	velocity = Vector2.ZERO
-
-	velocity = velocity.rotated(rotation)
-	move_and_slide()
-
 	if tank_life <= 0:
 		queue_free()
