@@ -4,13 +4,13 @@
 [ext_resource type="Texture2D" uid="uid://be3ur7c5685av" path="res://white_square.svg" id="2_f1a0p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dd2sb"]
-size = Vector2(155, 155)
+size = Vector2(248, 248)
 
 [node name="TankPointValidator" type="Area2D" groups=["point_validators"]]
 script = ExtResource("1_klcaj")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1.55, 1.55)
+scale = Vector2(2.48, 2.48)
 texture = ExtResource("2_f1a0p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
