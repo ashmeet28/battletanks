@@ -12,9 +12,7 @@ var tank_damage_given:int = 0
 func _ready():
 	missile_last_fired = Time.get_ticks_msec()
 
-func _physics_process(delta):
-	var bot_controller = []
-
+func _physics_process(_delta):
 	velocity = Vector2.ZERO
 
 	velocity = velocity.rotated(rotation)
