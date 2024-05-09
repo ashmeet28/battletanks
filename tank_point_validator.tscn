@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bcf7btuhby36v"]
+
+[ext_resource type="Script" path="res://tank_point_validator.gd" id="1_klcaj"]
+[ext_resource type="Texture2D" uid="uid://ds0mywnffrcba" path="res://white_circle.svg" id="1_og6rb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3g2xc"]
+radius = 120.0
+
+[node name="TankPointValidator" type="Area2D" groups=["point_validators"]]
+script = ExtResource("1_klcaj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2.4, 2.4)
+texture = ExtResource("1_og6rb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3g2xc")
