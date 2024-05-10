@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const MAX_SPEED:float = 100.0
+const MAX_SPEED:float = 300.0
 const TANK_COOLDOWN_TIME:int = 500
 var missile_last_fired:int = 0
 
@@ -34,14 +34,14 @@ func _physics_process(delta):
 		var next_pos = astar.get_point_position(id_path[1])
 		var v1 = position.direction_to(next_pos)
 		var v2 = Vector2.UP.rotated(rotation)
-		if v2.cross(v1) > 0:
+		if v2.cross(v1) > 0.05:
 			rotate(PI * delta)
-		elif v2.cross(v1) < 0:
+		elif v2.cross(v1) < -0.05:
 			rotate(-(PI * delta))
 		velocity = Vector2.UP.rotated(rotation) * MAX_SPEED
 		move_and_slide() 
 
-	show_astar_path(id_path)
+	#show_astar_path(id_path)
 		
 	if tank_life <= 0:
 		queue_free()
