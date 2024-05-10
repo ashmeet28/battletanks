@@ -32,27 +32,20 @@ func get_target_tank():
 func is_target_tank_in_line_of_sight():
 	free_white_square_points()
 
-	var p1 = global_position
-	var p2 = get_target_tank().global_position
-	if p1.distance_to(p2) > 1500.0:
-		return false
-	var ray_colliding_count:int = 0
-	var p = p1.direction_to(p2).rotated(PI/2) * 50
+	var p1 = position
+	var p2 = get_target_tank().position
 
-	spaw_white_square_points([p1-p, p2-p,p1+p, p2+p])
-	var q = PhysicsRayQueryParameters2D.create(p1 + p, p2 + p)
-	q.exclude = [self]
-	var r = get_world_2d().direct_space_state.intersect_ray(q)
-	if !(r.has("collider") && r.collider.is_in_group("tanks") && r.collider.tank_id == target_tank_id):
-		return false
+	$Area2D.position = p1.direction_to(p2).rotated(-rotation) * 750
+	$Area2D.rotation = p1.direction_to(p2).rotated(-rotation).angle() + (PI/2)
 	
-	q = PhysicsRayQueryParameters2D.create(p1 - p, p2 - p)
-	q.exclude = [self]
-	r = get_world_2d().direct_space_state.intersect_ray(q)
-	if !(r.has("collider") && r.collider.is_in_group("tanks") && r.collider.tank_id == target_tank_id):
-		return false
-
-	return true
+	var has_target_tank = false
+	if $Area2D.has_overlapping_bodies():
+		for b in $Area2D.get_overlapping_bodies():
+			if b.is_in_group("tanks") && b.tank_id == target_tank_id:
+				has_target_tank = true
+			elif b != self:
+				return false
+	return has_target_tank
 
 func tank_rotate_towards_direction(v1, delta):
 	var v2 = Vector2.UP.rotated(rotation)
