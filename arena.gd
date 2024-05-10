@@ -7,12 +7,12 @@ func get_next_tank_id():
 
 func _ready():
 	var instance = preload("res://tank.tscn").instantiate()
-	instance.position = Vector2(0, 500)
+	instance.position = Vector2(0, 400)
 	instance.tank_id = get_next_tank_id()
 	add_child(instance)
 	
 	var instance2 = preload("res://bot_tank.tscn").instantiate()
-	instance2.position = Vector2(600, 700)
+	instance2.position = Vector2(0, -400)
 	instance2.tank_id = get_next_tank_id()
 	instance2.target_tank_id = instance.tank_id
 	add_child(instance2)

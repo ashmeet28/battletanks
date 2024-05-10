@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://brid077wsfqiy"]
+
+[ext_resource type="Texture2D" uid="uid://be3ur7c5685av" path="res://white_square.svg" id="1_uhgrj"]
+
+[node name="WhiteSqaurePoint" type="Sprite2D" groups=["square_points"]]
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("1_uhgrj")
