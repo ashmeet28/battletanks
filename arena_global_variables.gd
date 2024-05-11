@@ -22,7 +22,8 @@ func init_bot_tank_astar():
 	var connection_offsets = [
 		[-sl, -sl], [0, -sl], [sl, -sl],
 		[-sl, 0], [sl, 0],
-		[-sl, sl], [0, sl], [sl, sl]]
+		[-sl, sl], [0, sl], [sl, sl]
+	]
 
 	for i in bot_tank_astar.get_point_ids():
 		var p1 = bot_tank_astar.get_point_position(i)

@@ -18,7 +18,6 @@ func tank_fire_missile():
 		instance.position = position + Vector2(0, -160).rotated(rotation)
 		instance.rotation = rotation
 		instance.owner_tank_id = get_instance_id()
-		print(instance.get_instance_id()," ", Time.get_ticks_usec())
 		get_parent().add_child(instance)
 		missile_last_fired = curr_time
 

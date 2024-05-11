@@ -1,38 +1,35 @@
 extends CharacterBody2D
 
-var max_speed:float = 250.0
+var max_speed:float = 500.0
 var tank_cooldown_time:int = 1000
 var missile_last_fired:int = 0
 
 var tank_id:int
-var tank_life:int = 100
+var tank_life:int = 100000
 var tank_damage_given:int = 0
 
 var target_tank_id:int
 
 func _ready():
 	missile_last_fired = Time.get_ticks_msec()
-	for s in range(-50, 50 + 10, 10):
-		print(s)
 
-func free_white_square_points():
-	for p in get_tree().get_nodes_in_group("square_points"):
-		p.queue_free()
 
-func spaw_white_square_points(new_square_points):
-	for p in new_square_points:
-		var instance = preload("res://white_sqaure_point.tscn").instantiate()
-		instance.global_position = Vector2(p.x, p.y)
-		get_parent().add_child(instance)
+#func free_white_square_points():
+	#for p in get_tree().get_nodes_in_group("square_points"):
+		#p.queue_free()
+#
+#func spaw_white_square_points(new_square_points):
+	#for p in new_square_points:
+		#var instance = preload("res://white_sqaure_point.tscn").instantiate()
+		#instance.global_position = Vector2(p.x, p.y)
+		#get_parent().add_child(instance)
 
 
 func is_target_tank_in_line_of_sight():
-	free_white_square_points()
-
 	var p1 = global_position
 	var p2 = instance_from_id(target_tank_id).global_position
 
-	if p1.distance_to(p2) > 1500.0:
+	if p1.distance_to(p2) > 1000.0:
 		return false
 
 
@@ -48,13 +45,13 @@ func is_target_tank_in_line_of_sight():
 
 	return true
 
-func tank_rotate_towards_direction(v1, delta):
+func tank_rotate_towards_direction(v1, ang_vel, delta) -> int:
 	var v2 = Vector2.UP.rotated(rotation)
-	if v2.cross(v1) > v2.cross(v2.rotated(PI * delta)):
-		rotate(PI * delta)
-	elif v2.cross(v1) < v2.cross(v2.rotated(-(PI * delta))):
-		rotate(-(PI * delta))
-
+	if v2.cross(v1) > v2.cross(v2.rotated(ang_vel * delta)):
+		return 1
+	elif v2.cross(v1) < v2.cross(v2.rotated(-(ang_vel * delta))):
+		return -1
+	return 0
 
 func tank_get_next_position_towards_target_tank():
 	var astar = ArenaGlobalVariables.bot_tank_astar
@@ -75,28 +72,54 @@ func tank_fire_missile():
 		get_parent().add_child(instance)
 		missile_last_fired = curr_time
 
+var bot_controller = [false, false, false, false, false]
+
+func update_bot_controller(delta):
+	bot_controller = [false, false, false, false, false]
+
+	var r = 0
+	if is_target_tank_in_line_of_sight():
+		r = tank_rotate_towards_direction(
+					position.direction_to(
+								instance_from_id(target_tank_id).position), PI, delta)
+	else:
+		var next_p = tank_get_next_position_towards_target_tank()
+		if next_p != null:
+			r = tank_rotate_towards_direction(
+						position.direction_to(next_p), PI, delta)
+			bot_controller[0] = true
+	if r == -1:
+		bot_controller[3] = true
+	elif r == 1:
+		bot_controller[2] = true
+
+	if $RayCast2D.is_colliding():
+		if $RayCast2D.get_collider().is_in_group("tanks"):
+			if $RayCast2D.get_collider().get_instance_id() == target_tank_id:
+				bot_controller[4] = true
 
 func _physics_process(delta):
 	if tank_life <= 0:
 		queue_free()
 		return
 
-	velocity = Vector2.ZERO
-	if is_target_tank_in_line_of_sight():
-		tank_rotate_towards_direction(
-					position.direction_to(
-								instance_from_id(target_tank_id).position),
-					delta)
-	else:
-		var next_p = tank_get_next_position_towards_target_tank()
-		if next_p != null:
-			tank_rotate_towards_direction(
-						position.direction_to(next_p), delta)
-			velocity = Vector2.UP.rotated(rotation) * max_speed
+	update_bot_controller(delta)
 
-	if $RayCast2D.is_colliding():
-		if $RayCast2D.get_collider().is_in_group("tanks"):
-			if $RayCast2D.get_collider().get_instance_id() == target_tank_id:
-				tank_fire_missile()
+	velocity = Vector2.ZERO
+	if bot_controller[0]:
+		velocity.y = -max_speed
+	if  bot_controller[1]:
+		velocity.y = max_speed
+
+	if  bot_controller[2]:
+		rotate(PI * delta)
+	if  bot_controller[3]:
+		rotate(-(PI * delta))
+
+	velocity = velocity.rotated(rotation)
+
+
+	if bot_controller[4]:
+		tank_fire_missile()
 
 	move_and_slide()
