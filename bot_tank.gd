@@ -1,11 +1,11 @@
 extends CharacterBody2D
 
-var max_speed:float = 500.0
-var max_ang_vel:float = PI
+var tank_speed:float = 500.0
+var tank_ang_vel:float = PI
+
 var tank_cooldown_time:int = 1000
 var missile_last_fired:int = 0
 
-var tank_id:int
 var tank_life:int = 100000
 var tank_damage_given:int = 0
 
@@ -37,7 +37,7 @@ func is_target_tank_in_line_of_sight():
 	for s in range(-50, 50 + 10, 10):
 		var p = p1.direction_to(p2).rotated(PI/2) * s
 		var q = PhysicsRayQueryParameters2D.create(p1 + p, p2 + p)
-		q.exclude = [self]
+		q.exclude = [get_rid()]
 		var r = get_world_2d().direct_space_state.intersect_ray(q)
 		if !(r.has("collider")
 				and r.collider.is_in_group("tanks")
@@ -82,12 +82,12 @@ func update_bot_controller(delta):
 	if is_target_tank_in_line_of_sight():
 		r = tank_rotate_towards_direction(
 					position.direction_to(
-								instance_from_id(target_tank_id).position), max_ang_vel, delta)
+								instance_from_id(target_tank_id).position), tank_ang_vel, delta)
 	else:
 		var next_p = tank_get_next_position_towards_target_tank()
 		if next_p != null:
 			r = tank_rotate_towards_direction(
-						position.direction_to(next_p), max_ang_vel, delta)
+						position.direction_to(next_p), tank_ang_vel, delta)
 			bot_controller[0] = true
 
 	if r == -1:
@@ -106,17 +106,16 @@ func _physics_process(delta):
 		return
 
 	update_bot_controller(delta)
-
 	velocity = Vector2.ZERO
 	if bot_controller[0]:
-		velocity.y = -max_speed
+		velocity.y = -tank_speed
 	if  bot_controller[1]:
-		velocity.y = max_speed
+		velocity.y = tank_speed
 
 	if  bot_controller[2]:
-		rotate(max_ang_vel * delta)
+		rotate(tank_ang_vel * delta)
 	if  bot_controller[3]:
-		rotate(-(max_ang_vel * delta))
+		rotate(-(tank_ang_vel * delta))
 
 	velocity = velocity.rotated(rotation)
 

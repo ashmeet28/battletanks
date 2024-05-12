@@ -1,11 +1,11 @@
 extends Area2D
 
-const SPEED:float = 1500.0
+var missile_speed:float = 1500.0
 var is_collided_with_tank:bool = false
 var owner_tank_id:int
 
 func _physics_process(delta):
-	position += Vector2.UP.rotated(rotation) * (SPEED * delta)
+	position += Vector2.UP.rotated(rotation) * (missile_speed * delta)
 	if has_overlapping_bodies():
 		for b in get_overlapping_bodies():
 			if b.is_in_group("tanks") && !is_collided_with_tank:
