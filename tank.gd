@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 var max_speed:float = 500.0
+var max_ang_vel:float = PI
 var tank_cooldown_time:int = 1000
 var missile_last_fired:int = 0
 
@@ -33,9 +34,9 @@ func _physics_process(delta):
 		velocity.y = max_speed
 
 	if Input.is_action_pressed("tank_turn_clockwise"):
-		rotate(PI * delta)
+		rotate(max_ang_vel * delta)
 	if Input.is_action_pressed("tank_turn_anticlockwise"):
-		rotate(-(PI * delta))
+		rotate(-(max_ang_vel * delta))
 
 	velocity = velocity.rotated(rotation)
 

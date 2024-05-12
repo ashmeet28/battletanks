@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 var max_speed:float = 500.0
+var max_ang_vel:float = PI
 var tank_cooldown_time:int = 1000
 var missile_last_fired:int = 0
 
@@ -81,12 +82,12 @@ func update_bot_controller(delta):
 	if is_target_tank_in_line_of_sight():
 		r = tank_rotate_towards_direction(
 					position.direction_to(
-								instance_from_id(target_tank_id).position), PI, delta)
+								instance_from_id(target_tank_id).position), max_ang_vel, delta)
 	else:
 		var next_p = tank_get_next_position_towards_target_tank()
 		if next_p != null:
 			r = tank_rotate_towards_direction(
-						position.direction_to(next_p), PI, delta)
+						position.direction_to(next_p), max_ang_vel, delta)
 			bot_controller[0] = true
 	if r == -1:
 		bot_controller[3] = true
@@ -112,9 +113,9 @@ func _physics_process(delta):
 		velocity.y = max_speed
 
 	if  bot_controller[2]:
-		rotate(PI * delta)
+		rotate(max_ang_vel * delta)
 	if  bot_controller[3]:
-		rotate(-(PI * delta))
+		rotate(-(max_ang_vel * delta))
 
 	velocity = velocity.rotated(rotation)
 
