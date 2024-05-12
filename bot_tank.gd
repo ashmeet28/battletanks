@@ -89,6 +89,7 @@ func update_bot_controller(delta):
 			r = tank_rotate_towards_direction(
 						position.direction_to(next_p), max_ang_vel, delta)
 			bot_controller[0] = true
+
 	if r == -1:
 		bot_controller[3] = true
 	elif r == 1:
