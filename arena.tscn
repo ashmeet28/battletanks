@@ -16,6 +16,7 @@ size = Vector2(300, 300)
 script = ExtResource("1_midel")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+enabled = false
 zoom = Vector2(0.25, 0.25)
 
 [node name="Wall" type="StaticBody2D" parent="." groups=["walls"]]
