@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqv174gfovtyj"]
+
+[ext_resource type="Texture2D" uid="uid://be3ur7c5685av" path="res://white_square.svg" id="1_cgn4a"]
+[ext_resource type="Script" path="res://white_collision_detector.gd" id="1_lx8sa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s7qnm"]
+size = Vector2(240, 240)
+
+[node name="WhiteCollisionDetector" type="Area2D" groups=["white_collision_detector"]]
+script = ExtResource("1_lx8sa")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2.4, 2.4)
+texture = ExtResource("1_cgn4a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_s7qnm")
